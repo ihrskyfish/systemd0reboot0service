@@ -1,11 +1,16 @@
 [Unit]
 Description=My Custom Task
-After=remote-fs.target nss-user-lookup.target
+#After=remote-fs.target nss-user-lookup.target
+After=cron.service
 
 [Service]
 Type=simple
 #EnvironmentFile=-/etc/default/cron
+ExecStartPre=sleep 50
 ExecStart=/path/to/your/script.sh
+#TimeoutStartSec=30  # 启动超时时间为 30 秒
+TimeoutStartSec=infinity 
+#TimeoutStopSec=
 #Restart=on-failure
 #User=yourusername
 #Group=yourgroupname
